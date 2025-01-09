@@ -8,8 +8,11 @@ module.exports = {
         return launchOptions;
       });
     },
+    
     viewportWidth: 1280,
     viewportHeight: 880,
+    //ativando a captura em video dos testes
+   // video: true,
     // Outras configurações específicas para testes E2E
   },
 
