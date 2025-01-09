@@ -1,11 +1,17 @@
-Cypress.Commands.add('fillMandatoryFieldsAndSubmit', function() {
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (perfil = {
+    //essa forma é para a listar ter valores padroẽs caso não receba nada;
+    firstName: 'Itanna',
+    lastName: 'Almeida',
+    email: 'email@teste.com',
+    text: 'texto simples'
+}) => {
 
     const textlong = 'teste cypress digintando devagar para ver a execução'
 
-    cy.get('#firstName').type('anderson')
-    cy.get('#lastName').type('almeida')
-    cy.get('#email').type('anderson@anderson.com')
-    cy.get('#open-text-area').type(textlong, { delay: 0 })
+    cy.get('#firstName').type(perfil.firstName)
+    cy.get('#lastName').type(perfil.lastName)
+    cy.get('#email').type(perfil.email)
+    cy.get('#open-text-area').type(perfil.text, { delay: 0 })
     cy.get('.button').click()
 
 })
