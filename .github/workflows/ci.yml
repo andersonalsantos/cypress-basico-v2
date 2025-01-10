@@ -1,12 +1,62 @@
 name: End-to-end tests 🧪
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
+
     steps:
+      # Checkout do repositório
       - name: Checkout
-        uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
+        uses: actions/checkout@v3
+
+      # Configuração do Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16 # Altere para a versão do Node.js que o projeto utiliza
+
+      # Instalação das dependências do projeto
+      - name: Install dependencies
+        run: npm install
+
+      # Atualização de dependências necessárias para execução de navegadores headless
+      - name: Install browser dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgbm-dev \
+            libnss3 \
+            libatk1.0-0 \
+            libx11-xcb1 \
+            libdrm2 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxrandr2 \
+            libxi6 \
+            libxss1 \
+            libasound2-data \
+            libpangocairo-1.0-0 || sudo apt-get install -y liboss4-salsa-asound2 || sudo apt-get install -y libasound2t64
+
+      # Inicialização do servidor da aplicação
+      - name: Start application
+        run: npm start &
+        env:
+          CI: true
+
+      # Aguardando a aplicação estar disponível
+      - name: Wait for application
+        run: npx wait-on http://localhost:3000 --timeout 300000
+
+      # Execução dos testes Cypress
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          browser: chrome
+          headless: true
