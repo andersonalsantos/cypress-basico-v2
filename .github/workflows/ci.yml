@@ -41,3 +41,4 @@ jobs:
       # Passo 8: Executar os testes Cypress
       - name: Run Cypress tests
         run: npx cypress run --config-file=cypress.config.js
+        
