@@ -1,22 +1,37 @@
 name: End-to-end tests 🧪
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
+    
     steps:
-      - name: Checkout
+      # Passo 1: Checkout do repositório
+      - name: Checkout repository
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+
+      # Passo 2: Limpar o cache npm para garantir uma instalação limpa
       - name: Clean npm cache
         run: npm cache clean --force
-      - name: List files
-        run: ls -la
+
+      # Passo 3: Instalar dependências com npm ci
+      - name: Install dependencies
+        run: npm ci
+
+      # Passo 4: Verificar a versão do Cypress para garantir que está correto
       - name: Check Cypress version
         run: npx cypress --version
-      - name: Run Cypress tests
-        run: npx cypress run --config-file=cypress.config.js    
-      
 
+      # Passo 5: Verificar arquivos para garantir que o `cypress.config.js` está presente
+      - name: List files
+        run: ls -la
+
+      # Passo 6: Executar os testes Cypress
+      - name: Run Cypress tests
+        run: npx cypress run --config-file=cypress.config.js
+        # Caso prefira rodar os testes com o modo interativo, use o comando abaixo:
+        # run: npx cypress open --config-file=cypress.config.js
