@@ -24,11 +24,13 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     .click()
 
     cy.get('.success').should('be.visible')
+    
   })
 
 
   //exercicio extra 2
   it('exibi msg erro submeter form email invalido', function () {
+    cy.clock() // congelar o relogio
     const textlong = Cypress._.repeat('Teste cypress digintando devagar para ver a execução. ', 4)
 
     cy.get('#firstName').type('anderson')
@@ -38,8 +40,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
       .type(textlong, { delay: 0 })
     cy.contains('button', 'Enviar')
       .click()
-
     cy.get('.error').should('be.visible')
+    cy.tick(3000) // avançar o relogio para 3s para verificar q desapareceu a msg
+
+    cy.get('.error').should('not.be.visible')
+   
   })
 
   // exercicio extra 3
