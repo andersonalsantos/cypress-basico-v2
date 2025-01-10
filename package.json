@@ -28,6 +28,6 @@
     "@types/cypress": "^0.1.6",
     "cypress": "^13.17.0",
     "typescript": "^5.7.2",
-    "serve": "^14.0.0"  // Adicionado o serve como dependência
+    "serve": "^14.0.0"
   }
 }
