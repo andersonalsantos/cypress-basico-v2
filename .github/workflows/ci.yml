@@ -29,9 +29,6 @@ jobs:
     
     - name: Instalando pacote wait
       run: npm install wait-on --save-dev
-    
-    - name: Wait for server to be ready
-      run: npx wait-on http://localhost:3000
 
     - name: Run Cypress tests
       run: npx cypress run --config-file=cypress.config.js
