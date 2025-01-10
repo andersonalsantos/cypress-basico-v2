@@ -24,3 +24,16 @@ module.exports = {
     // Outras configurações específicas para testes de componentes
   },
 };
+
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:3000', // Atualize conforme necessário
+    setupNodeEvents(on, config) {
+      // Adicione aqui eventos necessários
+    },
+    specPattern: 'cypress/e2e/**/*.cy.{js,ts}', // Caminho para seus testes
+  },
+});
+
