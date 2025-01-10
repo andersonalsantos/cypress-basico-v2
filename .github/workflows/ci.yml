@@ -10,5 +10,13 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v2
+      - name: Clean npm cache
+        run: npm cache clean --force
+      - name: List files
+        run: ls -la
+      - name: Check Cypress version
+        run: npx cypress --version
       - name: Run Cypress tests
-        run: npx cypress run --config-file=cypress.config.js
+        run: npx cypress run --config-file=cypress.config.js    
+      
+
