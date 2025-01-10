@@ -8,7 +8,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
-    
+
     steps:
       # Passo 1: Checkout do repositório
       - name: Checkout repository
@@ -26,12 +26,19 @@ jobs:
       - name: Check Cypress version
         run: npx cypress --version
 
-      # Passo 5: Verificar arquivos para garantir que o `cypress.config.js` está presente
+      # Passo 5: Listar arquivos para garantir que o `cypress.config.js` está presente
       - name: List files
         run: ls -la
 
-      # Passo 6: Executar os testes Cypress
+      # Passo 6: Iniciar o servidor da aplicação
+      - name: Start application
+        run: npm start &
+        # Certifique-se de que o seu comando `npm start` esteja correto, ou substitua por outro comando adequado para iniciar o servidor.
+
+      # Passo 7: Esperar até que o servidor esteja acessível
+      - name: Wait for application to be ready
+        run: npx wait-on http://localhost:3000 --timeout 300000
+
+      # Passo 8: Executar os testes Cypress
       - name: Run Cypress tests
         run: npx cypress run --config-file=cypress.config.js
-        # Caso prefira rodar os testes com o modo interativo, use o comando abaixo:
-        # run: npx cypress open --config-file=cypress.config.js
