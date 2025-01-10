@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # Testes automatizados com Cypress - Básico
+=======
+# Resolução dos Exercícios Testes Automatizados com Cypress - Básico
+>>>>>>> Stashed changes
 
 👋 Seja bem-vindo(a)!
 
@@ -26,4 +30,4 @@ Vá para a seção [estrutura do curso](./_course-structure_.md).
 
 ___
 
-Este é mais um curso da [**Escola Talking About Testing**](https://udemy.com/user/walmyr).
+Criado por  [**Anderson Almeida**](https://www.linkedin.com/in/anderson-almeida-dos-santos-4b398929/).
