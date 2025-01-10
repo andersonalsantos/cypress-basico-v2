@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Install dependencies for headless browser
+    - name: Update and install headless browser dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y \
@@ -36,8 +36,8 @@ jobs:
           libxrandr2 \
           libxi6 \
           libxss1 \
-          libasound2 \
-          libpangocairo-1.0-0
+          libasound2-data \
+          libpangocairo-1.0-0 || sudo apt-get install -y liboss4-salsa-asound2 || sudo apt-get install -y libasound2t64
 
     - name: Start application
       run: npm start &
