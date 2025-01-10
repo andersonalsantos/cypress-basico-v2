@@ -33,7 +33,6 @@ jobs:
       # Passo 6: Iniciar o servidor da aplicação
       - name: Start application
         run: npm start &
-        # Certifique-se de que o seu comando `npm start` esteja correto, ou substitua por outro comando adequado para iniciar o servidor.
 
       # Passo 7: Esperar até que o servidor esteja acessível
       - name: Wait for application to be ready
